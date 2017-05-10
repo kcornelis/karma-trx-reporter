@@ -128,11 +128,11 @@ var TRXReporter = function (baseReporterDecorator, config, emitter, logger, help
 
     this.specSuccess = this.specSkipped = this.specFailure = function (browser, result) {
         var unitTestId = newGuid();
-        var unitTestName = shortTestName
-            ? result.description
-            : browser.name + '_' + result.description;
         var className = result.suite.join('.');
-        var codeBase = className + '.' + unitTestName;
+        var unitTestName = shortTestName
+            ? className + '.' + result.description
+            : browser.name + '_' + className + '.' + result.description;
+        var codeBase =  unitTestName;
 
         var unitTest = testDefinitions.ele('UnitTest')
             .att('name', unitTestName)
